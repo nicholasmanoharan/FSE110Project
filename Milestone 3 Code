@@ -1,0 +1,54 @@
+
+autoMode = false; 
+liftSpeed = 30;   
+driveSpeed = 50;  
+turnSpeed = 30;   
+ultrasonicThreshold = 20; 
+
+
+while true
+    
+    waitforbuttonpress;
+    key = get(gcf, 'CurrentCharacter'); 
+
+   
+    if strcmp(key, 'i') 
+        setMotorSpeed('C', liftSpeed); 
+    elseif strcmp(key, 'k') 
+        setMotorSpeed('C', -liftSpeed); 
+    elseif strcmp(key, 'l') 
+        setMotorSpeed('C', 0); 
+    end
+
+    
+    if strcmp(key, 'm') 
+        autoMode = ~autoMode; 
+        if autoMode
+            disp('Auto Mode Activated');
+        else
+            disp('Auto Mode Deactivated');
+        end
+    end
+
+    
+    if autoMode
+        
+        distance = readUltrasonicSensor(4); 
+
+        if distance < ultrasonicThreshold
+            
+            setMotorSpeed('A', -turnSpeed); 
+            setMotorSpeed('B', turnSpeed);  
+        else
+            
+            setMotorSpeed('A', driveSpeed); 
+            setMotorSpeed('B', driveSpeed); 
+        end
+    else
+       
+        setMotorSpeed('A', 0); 
+        setMotorSpeed('B', 0); 
+    end
+
+    pause(0.1); 
+end
