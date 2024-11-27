@@ -23,6 +23,14 @@ while 1
         case 'd'  
             disp('Rotating Right');
             brick.MoveMotor('B', -50); 
+
+        case 'e' 
+            disp('Forklift Moving Up');
+            brick.MoveMotor('C', 30); 
+
+        case 'r'
+            disp('Forklift Moving Down');
+            brick.MoveMotor('C', -30); 
             
         case 'q'  
             disp('Exiting control...');
